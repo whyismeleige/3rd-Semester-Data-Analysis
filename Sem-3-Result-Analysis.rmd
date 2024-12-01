@@ -29,7 +29,7 @@ And if you are interested to check last semesters result analysis,<br>
 In the following table, if any of my friends are reading this they can see there results in the bottom table.
 
 ```{r results,echo=FALSE}
-results <- read.csv("D:\\Program Scripts\\Side-Projects\\Web_Scraping_College_Website\\External Marks BBA IT 2nd year.csv")
+results <- read.csv("D:\\Program Scripts\\Side-Projects\\Web_Scraping_College_Website\\BBA\\BBA IT\\External Marks BBA IT 2nd year.csv")
 results <- results %>% rename(PHRM = Principles.of.Human.Resource.Management,
                               LAB = Legal.Aspects.of.Business,
                               CMA = Cost...Management.Accounting,
