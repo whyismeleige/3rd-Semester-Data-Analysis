@@ -1,0 +1,173 @@
+---
+title: "3rd Semester Result Analysis"
+author: "Piyush Jain"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    css: styles.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readxl)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+library(DT)
+library(tidyverse)
+library(grid)
+library(gridExtra)
+library(ggthemes)
+```
+
+## R Markdown
+
+Hello to anyone, who is reading this. My name is Piyush Jain, and this is my analysis of my class results for the 3rd Semester. 
+I have acquired my data and have properly arranged it in a way that anyone who read this will understand it.<br>
+And if you are interested to check last semesters result analysis,<br>
+<a href = "https://whyismeleige.github.io/2nd-Semester-Results-Data-Analysis/2nd-Semester-Results-Data-Analysis.html"><h4>Click Here</h4></a><br>
+In the following table, if any of my friends are reading this they can see there results in the bottom table.
+
+```{r results,echo=FALSE}
+results <- read.csv("D:\\Program Scripts\\Side-Projects\\Web_Scraping_College_Website\\External Marks BBA IT 2nd year.csv")
+results <- results %>% rename(PHRM = Principles.of.Human.Resource.Management,
+                              LAB = Legal.Aspects.of.Business,
+                              CMA = Cost...Management.Accounting,
+                              Statistics = Business.Statistics.using.SPSS..T.P.,
+                              DBMS = Database.Management.System..T.P.,
+                              UHVGS = Universal.Human.Values...Gender.Sensitization..SEC.)
+datatable(results,options = list(pagelength = 6))
+```
+
+## Plots of BBA IT Sem 3 Results
+
+In the multiple plots that we have been given below we clearly see the number of students that have passed or failed in the subjects:
+
+Principles of Human Resource Management, Legal Aspects of Business, Cost and Management Accounting, Business Statistics, Database Management Systems, Universal Human Values and Gender Sensitization
+
+```{r pressure, echo=FALSE}
+phrm_analysis <- results %>% group_by(PHRM) %>% summarize(student.name = n()) %>% ggplot(aes(PHRM,student.name)) +
+  geom_col() + 
+  xlab("SGPA of Students") + 
+  ylab("Number of Students") + 
+  ggtitle("PHRM Results") +
+  theme_wsj() +
+  theme(legend.position = "none",text = element_text(size = 10))
+
+
+lab_analysis <- results %>% group_by(LAB) %>% summarize(student.name = n()) %>% ggplot(aes(LAB,student.name)) +
+  geom_col() + 
+  xlab("SGPA of Students") + 
+  ylab("Number of Students") + 
+  ggtitle("LAB Results") +
+  theme_wsj() +
+  theme(legend.position = "none",text = element_text(size = 10))
+
+
+cma_analysis <- results %>% group_by(CMA) %>% summarize(student.name = n()) %>% ggplot(aes(CMA,student.name)) +
+  geom_col() + 
+  xlab("SGPA of Students") + 
+  ylab("Number of Students") + 
+  ggtitle("CMA Results") +
+  theme_wsj() +
+  theme(legend.position = "none",text = element_text(size = 10))
+
+stats_analysis <- results %>% group_by(Statistics) %>% summarize(student.name = n()) %>% ggplot(aes(Statistics,student.name)) +
+  geom_col() + 
+  xlab("SGPA of Students") + 
+  ylab("Number of Students") + 
+  ggtitle("Stats Results") +
+  theme_wsj() +
+  theme(legend.position = "none",text = element_text(size = 10))
+
+
+dbms_analysis <- results %>% group_by(DBMS) %>% summarize(student.name = n()) %>% ggplot(aes(DBMS,student.name)) +
+  geom_col() + 
+  xlab("SGPA of Students") + 
+  ylab("Number of Students") + 
+  ggtitle("DBMS Results") +
+  theme_wsj() +
+  theme(legend.position = "none",text = element_text(size = 10))
+
+
+uhvgs_analysis <- results %>% group_by(UHVGS) %>% summarize(student.name = n()) %>% ggplot(aes(UHVGS,student.name)) +
+  geom_col() + 
+  xlab("SGPA of Students") + 
+  ylab("Number of Students") + 
+  ggtitle("UHVGS Results") +
+  theme_wsj() +
+  theme(legend.position = "none",text = element_text(size = 10))
+
+
+combined_graphs <- grid.arrange(phrm_analysis,
+                                lab_analysis,
+                                cma_analysis,
+                                stats_analysis,
+                                dbms_analysis,
+                                uhvgs_analysis)
+```
+
+## PHRM Plot
+
+This was an easy subject to score in, many students performed really well in this subject since it is a theoretical subject, but since it is more theoretical no student scored more than A+.
+
+```{r PHRM,echo = FALSE}
+phrm_analysis
+```
+
+## LAB Plot
+
+Legal Aspects of Business is a mixed bag, you can see it from the graph that 6 students failed and the graph is evenly distributed among all grades.
+
+```{r LAB,echo = FALSE}
+lab_analysis
+```
+
+## CMA Plot 
+This was shocker, Many students failed in this exam due to its practical complexity of the subject, and no one scored an O grade in this exam.
+
+```{r CMA, echo = FALSE}
+cma_analysis
+```
+
+## Statistics Plot
+
+I guess I lost a bet, All jokes aside, I dint think many students would pass this exam due to its maths and "other reasons", but it is a good sign that many students dint fail in this exam.
+
+
+```{r Statistics, echo=FALSE}
+stats_analysis
+```
+
+## DBMS Plot
+
+Oh my God, this is a massive Improvement, for an IT subject we really scored well than our previous semesters, if you don't believe compare and contrast between Python and DBMS and you will know yourselves.
+
+<img src = "D:\Program Scripts\R Repository Practise\2nd-Semester-Results-Data-Analysis\figs\python-results.png" height = "480" width = "672">
+
+```{r DBMS,echo=FALSE}
+dbms_analysis
+```
+
+
+## UHVGS Plot
+
+This was the most easiest subject out of all subjects and we can clearly see in the graph that majority of students have scored excellent grades in this subject but this time due to attendance many students were unable to write the exam.
+
+```{r es,echo=FALSE}
+uhvgs_analysis
+```
+
+## Top 10 performing students
+
+This semester the top 10 students performed are given below in the table where most of the students had a tough time, these students passed with an exceptional grade.
+This time both Gurpreet and Rahim scored the best marks.
+Congratulations to them!
+
+```{r top10,echo = FALSE,warning= FALSE}
+top_10 <- results %>% filter(!is.na(SGPA))%>% 
+  mutate(student.name = reorder(student.name,SGPA)) %>%
+  arrange(desc(SGPA)) %>%
+  head(10)
+kable(top_10,"html") %>% kable_styling(full_width = FALSE)
+```
